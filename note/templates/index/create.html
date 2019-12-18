@@ -1,0 +1,18 @@
+{%  extends 'index/base.html' %}
+
+{% block note_form %}
+<form action="/index/create" method="post">
+    <label>Title:</label>
+    <input name="title" id="title" required>
+    <label>Txt</label>
+    <input type="text" name="txt" id="txt" required>
+    <input type="submit" value="Create">
+</form>
+{% endblock %}
+
+{% block show_note_list %}
+<h1>Note List</h1>
+{% for title in note_list %}
+<a href="{{ url_for('index.view', note_id=note.id) }}"><p>{{note.id}} : {{ note.title }} : {{ note.txt }}</p></a>
+{% endfor %}
+{% endblock %}

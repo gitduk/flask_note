@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<ul>
+    {% if g.user %}
+    <li><a href="{{ url_for('user.logout') }}">Log Out</a>
+    <li><a href="{{ url_for('index.show_user_detail', user_id=g.user.id) }}">{{ g.user['name'] }}</a></li>
+    {% else %}
+    <li><a href="{{ url_for('user.register') }}">Register</a>
+    <li><a href="{{ url_for('user.login') }}">Log In</a>
+    {% endif %}
+</ul>
+
+<a href="{{ url_for('index.index') }}"><h1>{{ index }}</h1></a>
+
+
+{% block create_note %}
+{% endblock %}
+
+{% block show_note_txt %}
+{% endblock %}
+
+{% block note_form %}
+{% endblock %}
+
+{% block assist_form %}
+{% endblock %}
+
+{% block show_assists_of_note %}
+{% endblock %}
+
+
+{% block show_note_list %}
+{% endblock %}
+
+{% block assist_list %}
+{% endblock %}
+
+{% block user_detail %}
+{% endblock %}
+
+{% block assist_detail %}
+{% endblock %}
+
+</body>
+</html>

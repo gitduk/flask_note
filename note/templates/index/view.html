@@ -1,0 +1,28 @@
+{% extends 'index/base.html' %}
+
+{% block show_note_txt %}
+<h1>Current Note</h1>
+<p>{{ view_note.txt }}</p>
+<a href="{{ url_for('index.delete', note_id=view_note.id) }}">Delete</a>
+
+<a href="{{ url_for('index.create_assist', note_id=view_note.id) }}">CreateAssist</a>
+{% endblock %}
+
+{% block show_assists_of_note %}
+<h1>Current Note Assist List</h1>
+{% for assist in assist_list %}
+<a href="{{ url_for('index.show_assist_detail', assist_id=assist.id) }}"><p>{{ assist.name }}</p></a>
+{% endfor %}
+{% endblock %}
+
+
+{% block show_note_list %}
+<h1>Note List</h1>
+{% for note in note_list %}
+<a href="{{ url_for('index.view', note_id=note.id) }}"><p>{{note.id}} : {{ note.title }} : {{ note.txt }}</p></a>
+{% endfor %}
+{% endblock %}
+
+{% block create_note %}
+<a href="{{ url_for('index.create') }}">CreateNote</a>
+{% endblock %}
