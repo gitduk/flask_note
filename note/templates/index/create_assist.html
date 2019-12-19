@@ -25,7 +25,7 @@
 <h1>Assist List</h1>
 
 {% for assist in assist_list %}
-<a href="{ url_for('index.show_detail') }"><p>{{ assist.name }}</p></a>
+<a href="{{ url_for('index.show_assist_detail', assist_id=assist.id) }}"><p>{{ assist.name }}</p></a>
 {% endfor %}
 
 {% endblock %}

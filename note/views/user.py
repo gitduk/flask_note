@@ -7,6 +7,8 @@ from flask import render_template
 from flask import request
 from flask import session
 from flask import url_for
+
+from note.models.index_model import Assists
 from note.models.login_model import User
 from note.models import db, init_db
 
@@ -14,6 +16,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/login', methods=("GET", "POST"))
 def login():
+    index = 'Login'
     # session
     # user =  session.get('username')
     # if user:
@@ -21,24 +24,31 @@ def login():
     #     return redirect(url_for('index.view'))
 
     user_list = User.query.all()
+    assist_list = Assists.query.all()
 
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
-        q_user = User.query.filter_by(name=username).first()
-        q_password = User.query.filter_by(password=password).first()
+        user = User.query.filter_by(name=username).first()
+        u_password = User.query.filter_by(password=password).first()
 
-        if q_user and q_password:
-            flash('You were successfully logged in', 'yes')
+        assist = Assists.query.filter_by(name=username).first()
+        a_password = Assists.query.filter_by(password=password).first()
+
+        if user and u_password:
             session['username'] = username
-            session['password'] = password
+            session['authority'] = user.authority
+            return redirect(url_for('index.index'))
+        elif assist and a_password:
+            session['username'] = username
+            session['authority'] = assist.authority
             return redirect(url_for('index.index'))
         else:
             flash('You have an error', 'error')
-            return render_template('user/login.html', user_list = user_list)
+            return render_template('user/login.html', **locals())
     else:
-        return render_template('user/login.html', user_list = user_list)
+        return render_template('user/login.html', **locals())
 
 
 

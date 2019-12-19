@@ -24,4 +24,5 @@ class Assists(Base):
     name = Column(String(50), unique=True)
     email = Column(String(120), unique=True)
     password = Column(String(120))
+    authority = Column(Integer, default=0)
 

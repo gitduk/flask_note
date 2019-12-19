@@ -8,7 +8,7 @@
 <ul>
     {% if g.user %}
     <li><a href="{{ url_for('user.logout') }}">Log Out</a>
-    <li><a href="{{ url_for('index.show_user_detail', user_id=g.user.id) }}">{{ g.user['name'] }}</a></li>
+    <li><a href="{{ url_for('index.show_user_detail') }}">{{ g.user['name'] }}</a></li>
     {% else %}
     <li><a href="{{ url_for('user.register') }}">Register</a>
     <li><a href="{{ url_for('user.login') }}">Log In</a>
@@ -44,6 +44,9 @@
 {% endblock %}
 
 {% block assist_detail %}
+{% endblock %}
+
+{% block flash %}
 {% endblock %}
 
 </body>

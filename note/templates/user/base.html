@@ -17,7 +17,7 @@
     {% block head%}{% endblock %}
 
 
-    {% with messages = get_flashed_messages(category_filter=["yes"]) %}
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
     {% if messages %}
     <ul class=flashes>
         {% for message in messages %}
@@ -44,6 +44,11 @@
     <h1>User List</h1>
     {% for user in user_list %}
     <p>{{ user.id }} : {{ user.name }} : {{ user.password }}</p>
+    {% endfor %}
+
+    <h1>Assist List</h1>
+    {% for assist in assist_list %}
+    <p>{{ assist.id }} : {{ assist.name }} : {{ assist.password }}</p>
     {% endfor %}
 
 </body>

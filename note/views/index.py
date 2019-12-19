@@ -17,23 +17,24 @@ index_bp = Blueprint('index', __name__, url_prefix='/index')
 
 
 @index_bp.route('/index', methods=("GET", "POST"))
-@login_required
+@login_required()
 def index():
+    index = "Index"
     note_list = Notes.query.all()
     assist_list = Assists.query.all()
-    index = "Index"
     return render_template('index/index.html', **locals())
 
 
-@index_bp.route('/show_user_detail/<int:user_id>', methods=("GET", "POST"))
-@login_required
-def show_user_detail(user_id):
+@index_bp.route('/show_user_detail', methods=("GET", "POST"))
+@login_required()
+def show_user_detail():
     index = "User Detail"
     return render_template('index/show_user_detail.html', **locals())
 
 
 @index_bp.route('/show_assist_detail/<int:assist_id>', methods=("GET", "POST"))
-@login_required
+@authority
+@login_required()
 def show_assist_detail(assist_id):
     index = "Assist Detail"
     assist = Assists.query.filter_by(id=assist_id).first()
@@ -41,7 +42,7 @@ def show_assist_detail(assist_id):
 
 
 @index_bp.route('/view/<int:note_id>', methods=("GET", "POST"))
-@login_required
+@login_required()
 def view(note_id):
     note_list = Notes.query.all()
     view_note = Notes.query.filter_by(id=note_id).first()
@@ -59,7 +60,8 @@ def view(note_id):
 
 
 @index_bp.route('/create', methods=("GET", "POST"))
-@login_required
+@authority
+@login_required()
 def create():
     note_list = Notes.query.all()
     if request.method == 'POST':
@@ -69,6 +71,7 @@ def create():
         note.user_id = g.user.id
         db.session.add(note)
         db.session.commit()
+        index = "Create Note"
         return redirect(url_for('index.view', note_id=note.id))
     else:
         index = "Create Note"
@@ -76,7 +79,8 @@ def create():
 
 
 @index_bp.route('/delete/<int:note_id>', methods=("GET", "POST"))
-@login_required
+@authority
+@login_required()
 def delete(note_id):
     delete_note = Notes.query.filter_by(id=note_id).delete()
     delete_association = NotesAssists.query.filter_by(note_id=note_id).delete()
@@ -88,14 +92,18 @@ def delete(note_id):
     next_note = Notes.query.filter_by(id=note_id + 1).first()
 
     if next_note:
+        index = "View"
         return redirect(url_for('index.view', note_id=note_id+1))
     else:
+        index = "View"
         return redirect(url_for('index.view', note_id=delete_note_id-1))
 
 
 @index_bp.route('/create_assist/<int:note_id>', methods=("GET", "POST"))
-@login_required
+@authority
+@login_required()
 def create_assist(note_id):
+    index = "Create Assist"
     assist_list = Assists.query.all()
     note = Notes.query.filter_by(id=note_id).first()
 
@@ -115,6 +123,7 @@ def create_assist(note_id):
         db.session.add(notes_assists)
         db.session.commit()
 
+        index = "View"
         return redirect(url_for('index.view', note_id=note_id))
     else:
         index = "Create Assist"

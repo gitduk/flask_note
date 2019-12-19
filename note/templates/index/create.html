@@ -12,7 +12,7 @@
 
 {% block show_note_list %}
 <h1>Note List</h1>
-{% for title in note_list %}
+{% for note in note_list %}
 <a href="{{ url_for('index.view', note_id=note.id) }}"><p>{{note.id}} : {{ note.title }} : {{ note.txt }}</p></a>
 {% endfor %}
 {% endblock %}

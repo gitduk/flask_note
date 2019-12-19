@@ -19,3 +19,15 @@
 {% block create_note %}
 <a href="{{ url_for('index.create') }}">CreateNote</a>
 {% endblock %}
+
+{% block flash %}
+{% with messages = get_flashed_messages(category_filter=["authority"]) %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}
