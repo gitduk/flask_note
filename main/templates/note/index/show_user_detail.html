@@ -1,0 +1,11 @@
+{%  extends 'note/index/base.html' %}
+
+{% block user_detail %}
+
+<p>ID : {{ g.user.id }}</p>
+<p>NAME : {{ g.user.name }}</p>
+<p>PASSWORD : {{ g.user.password }}</p>
+<p>EMAIL : {{ g.user.email }}</p>
+<p>AUTHORITY : {{ g.user.authority }}</p>
+
+{% endblock %}

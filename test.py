@@ -1,2 +1,0 @@
-from wechatpy.utils import check_signature
-from wechatpy.exceptions import InvalidSignatureException
