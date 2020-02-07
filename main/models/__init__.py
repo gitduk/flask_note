@@ -13,3 +13,5 @@ def init_db(app):
     from main.models.lsqlalchemy import test
     with app.app_context():
         db.create_all()
+
+

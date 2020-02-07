@@ -5,7 +5,7 @@ from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 import xml.etree.ElementTree as ET
 from main.views.wchat.constants import asc_token, msg_map
-from main.views.wchat.tfunc import to_localtime
+from main.views.tfunc import to_localtime
 from main.models.wchat.msg_model import *
 
 

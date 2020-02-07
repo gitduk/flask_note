@@ -12,7 +12,11 @@
 {% block show_note_list %}
 <h1>Note List</h1>
 {% for note in note_list %}
-<a href="{{ url_for('index.view', note_id=note.id) }}"><p>{{note.id}} : {{ note.title }} : {{ note.txt }}</p></a>
+<a href="{{ url_for('index.view', note_id=note.id) }}"><p>{{note.id}} : {{ note.title }} : {{ note.txt }} : {{ note.create_time }} : {{ note.updated_on}} : {{ note.deleted }}</p></a>
+{% endfor %}
+<h1>Roll List</h1>
+{% for rl in roll_list %}
+<a href="{{ url_for('index.view', note_id=rl.note_id) }}"><p>NoteId: {{ rl.note_id }} DeleteType: {{ rl.delete_type }} Operation: {{ rl.operation }}</p></a>
 {% endfor %}
 {% endblock %}
 

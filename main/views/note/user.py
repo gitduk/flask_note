@@ -13,6 +13,7 @@ from main.models import db
 
 user_bp = Blueprint('user', __name__, url_prefix='/note/user')
 
+
 @user_bp.route('/login', methods=("GET", "POST"))
 def login():
     index = 'Login'
@@ -44,11 +45,10 @@ def login():
             session['authority'] = assist.authority
             return redirect(url_for('index.index'))
         else:
-            flash('You have an error', 'error')
+            flash('username or password error', 'error')
             return render_template('note/user/login.html', **locals())
     else:
         return render_template('note/user/login.html', **locals())
-
 
 
 @user_bp.route('/register', methods=("GET", "POST"))
@@ -64,10 +64,10 @@ def register():
         db.session.add(user)
         try:
             db.session.commit()
-            return redirect('login')
+            return redirect('note/user/login')
         except sqlalchemy.exc.IntegrityError:
             flash('Error')
-            return redirect('login')
+            return redirect('note/user/login')
     else:
         return render_template('note/user/register.html', **locals())
 
@@ -76,4 +76,3 @@ def register():
 def logout():
     session.clear()
     return redirect(url_for('user.login'))
-

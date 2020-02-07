@@ -1,5 +1,5 @@
 from main.models import db, init_db
-from flask import Flask
+from flask import Flask, app
 
 
 def create_app(test_config=None):
@@ -42,6 +42,12 @@ class Config(object):
     SQLALCHEMY_ECHO = False
     DEBUG = True
     TESTING = False
+    # REDIS_URL = 'redis://127.0.0.1:6379/0'
+    CACHE_TYPE = 'redis'
+    CACHE_REDIS_HOST = '127.0.0.1'
+    CACHE_REDIS_PORT = 6379
+    CACHE_REDIS_DB = ''
+    CACHE_REDIS_PASSWORD = ''
 
 
 class ProductionConfig(Config):
@@ -54,3 +60,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+
+
+class MyConfig(object):
+    LOCAL_DELETE = False

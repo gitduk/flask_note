@@ -12,7 +12,7 @@
     {% else %}
     <li><a href="{{ url_for('user.register') }}">Register</a>
     <li><a href="{{ url_for('user.login') }}">Log In</a>
-    {% endif %}
+        {% endif %}
 </ul>
 
 <a href="{{ url_for('index.index') }}"><h1>{{ index }}</h1></a>
@@ -47,6 +47,9 @@
 {% endblock %}
 
 {% block flash %}
+{% endblock %}
+
+{% block modify_note %}
 {% endblock %}
 
 </body>

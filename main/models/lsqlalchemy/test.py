@@ -1,16 +1,19 @@
-from sqlalchemy import *
-from main.models import db, init_db
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, create_engine, Sequence
+from sqlalchemy.orm import sessionmaker
 
-Base = db.Model
+Base = declarative_base()
+engine = create_engine('sqlite:///:memory:', echo=False)
+Session = sessionmaker(bind=engine, autocommit=True)
 
 
-class Test(Base):
-    id = Column(Integer, primary_key=True, autoincrement=True)
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    name = Column(String(50))
+    fullname = Column(String(50))
+    nickname = Column(String(50))
 
     def __repr__(self):
-        return '<ID %r>' % self.id
-
-    def __str__(self):
-        return '<id %r>' % self.id
-
-
+        fmt = 'id={}, name={}'
+        return fmt.format(self.id, self.name)

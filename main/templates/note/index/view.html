@@ -4,8 +4,8 @@
 <h1>Current Note</h1>
 <p>{{ view_note.txt }}</p>
 <a href="{{ url_for('index.delete', note_id=view_note.id) }}">Delete</a>
-
 <a href="{{ url_for('index.create_assist', note_id=view_note.id) }}">CreateAssist</a>
+<a href="{{ url_for('index.modify_note', note_id=view_note.id) }}">Modify</a>
 {% endblock %}
 
 {% block show_assists_of_note %}
